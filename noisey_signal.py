@@ -1,5 +1,5 @@
 #Day 1 progress: Generating a sine wave with additive Gaussian noise and plotting the time-domain signal.
-#Day 4 Milestone: Applying the Fast Fourier Transform (FFT),
+#Day 2 Milestone: Applying the Fast Fourier Transform (FFT),
 #plotting the frequency spectrum, and confirming the sharp signal peak at 5 Hz above the noise floor.
 
 
