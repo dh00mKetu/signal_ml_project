@@ -32,7 +32,7 @@ mag10=np.fft.fft(final)
 mag11= (mag10[0:(len(mag10))//2])
 freq2=np.fft.fftfreq(n=(len(final)),d=1/fs)
 mag=np.abs(mag11)
-fourier_freq=(freq2[0:(len(freq2)//2)])
+fourier_freq=(freq2[0:(len(freq2))//2])
 #"""
 plt.plot(fourier_freq,mag)
 plt.xlabel("Frequency(Hz)",size=18)
