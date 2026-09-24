@@ -1,24 +1,22 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import signal
+import uci_human_act
 
 
-body_acc_x_train=np.loadtxt("human+activity+recognition+using+smartphones/UCI HAR Dataset/train/Inertial Signals/body_acc_x_train.txt")
-y_text=np.loadtxt("human+activity+recognition+using+smartphones/UCI HAR Dataset/train/y_train.txt")
-
-transformed_signal101=np.fft.fft(body_acc_x_train)
-transformed_signal10=abs(transformed_signal101)
-transformed_signal11=(transformed_signal10[0:(len(transformed_signal10))//2])
-
-fs=50
-time=np.arange(0,2.56,1/fs)
-freq1=np.fft.fftfreq(n=len(time),d=1/fs)
-freq2=freq1[0:(len(freq1))//2]
 #filter
+b,a = signal.butter(3,8,'low',fs=uci_human_act.fs)
+filtered_body_acc_x_train=signal.filtfilt(b,a,uci_human_act.body_acc_x_train)
 
-b,a = signal.butter(3,8,'low',fs=fs)
-filtered_body_acc_x_train=signal.filtfilt(b,a,body_acc_x_train)
-plt.plot(time,filtered_body_acc_x_train[0],label="filtered")
-plt.plot(time,body_acc_x_train[0],label="original")
-plt.legend()
-plt.show()
+
+
+if __name__ == "__main__": 
+    plt.plot(uci_human_act.time,filtered_body_acc_x_train[0],label="Filtered",color="red")
+    plt.plot(uci_human_act.time,uci_human_act.body_acc_x_train[0],label="Original",color="blue")
+    plt.xlabel("Time(sec)",size=18)
+    plt.ylabel("Amplitude",size=18)
+    plt.title("Body Acc: Original vs. Filtered Signal — Window 0(First)",size=24)
+    plt.legend()
+    plt.grid(True,axis="both",linestyle="--")
+    plt.minorticks_on()
+    plt.show()
